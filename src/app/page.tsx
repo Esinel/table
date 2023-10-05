@@ -1,95 +1,160 @@
+'use client'
 import Image from 'next/image'
+import './table.carbon.scss';
 import styles from './page.module.css'
+import { DataTable, Table as TableCarbon,  TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from '@carbon/react';
+import { headerData, rowData, headerDataBig, rowDataBig, getRowData } from '../../data';
+import { ChangeEvent, useState, useMemo } from 'react';
+
 
 export default function Home() {
+
+  const [showFirst, setShowFirst] = useState('project');
+  const [isRuleHidden, setIsRuleHidden] = useState(false);
+
+
+  function handleChangeShowFirst(e: ChangeEvent<HTMLInputElement>) {
+    setShowFirst(e.target.value);
+  }
+
+  function handleHideRule(e: ChangeEvent<HTMLInputElement>) {
+    setIsRuleHidden(e.target.checked);
+  }
+
+  const finalHeaders = useMemo(() => getFinalHeaders(showFirst, isRuleHidden), [showFirst, isRuleHidden]);
+
+  const finalRows = useMemo(() => getRowData(), [])
+
+  debugger
+
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
+     <h1>Table - Extended</h1>
+
+
+      <fieldset>
+        <legend>Show first:</legend>
+
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="projectFirst" name="showFirst" value="project" {...(showFirst === 'project' && {checked: true})} />
+          <label htmlFor="statusFirst">Show project first</label>
         </div>
+
+        <div>
+          <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="nameFirst" name="showFirst" value="name" {...(showFirst === 'name' && {checked: true})} />
+          <label htmlFor="nameFirst">Show name first</label>
+        </div>
+
+        
+      </fieldset>
+
+
+
+      <div style={{margin: '15px 0'}}>
+        <input onChange={(e) => handleHideRule(e)} type="checkbox" id="hideRule" name="hideRule"/>
+        <label htmlFor='hideRule'>{' '}Hide ID Column</label>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="table-container">
+        <DataTable
+          isSortable={true}
+          rows={finalRows}
+          headers={finalHeaders}
         >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+          {({ rows, headers, getHeaderProps, getTableProps }) => {
+            return (
+              <TableContainer
+                title={'Results'}
+                tabIndex={0}
+                className='tabela'
+              >
+                <TableCarbon
+                  {...getTableProps()}
+                  size="lg"
+                  className={styles.table}
+                >
+                  <TableHead>
+                    <TableRow>
+                      {headers.map((header, key) => {
+                        return (
+                          //@ts-ignore
+                          <TableHeader
+                            {...getHeaderProps({
+                              header,
+                              isSortable: true
+                            })}
+                            key={key}
+                            className={styles.tableHeader}
+                          >
+                            {header.header}
+                          </TableHeader>
+                        );
+                      })}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => {
+                      return (
+                        <TableRow
+                          key={row.id}
+                          // className={clsx(
+                          //   styles.tableRow,
+                          //   onRowClick && styles.tableRowClickable
+                          // )}
+                          tabIndex={0}
+                          //onMouseOver={() => handleRowHover(row.id)}
+                          // onFocus={
+                          //   isArchivable
+                          //     ? () => handleRowHover(row.id)
+                          //     : undefined
+                          // }
+                          // onClick={onRowClick && handleRowClick}
+                          // onKeyDown={onRowClick && handleEnterOrSpaceKeydown}
+                        >
+                          {row.cells.map((cell) => (
+                            <TableCell key={cell.id}>{cell.value}</TableCell>
+                          ))}
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </TableCarbon>
+              </TableContainer>
+            );
+          }}
+        </DataTable>
       </div>
     </main>
   )
 }
+
+
+function getFinalHeaders(showFirst: string, isRuleColumnHidden: boolean) {
+
+  let finalHeaders = [];
+
+  if (showFirst === 'name') {
+    finalHeaders = [...headerDataBig];
+  } else {
+    finalHeaders = swapElements(headerDataBig, 0, 5);
+  }
+
+  if (isRuleColumnHidden) {
+    finalHeaders.splice(1, 1);
+  }
+
+  return finalHeaders;
+}
+
+function swapElements (array: any[], index1: number, index2: number) {
+  const newArr = [...array];
+  const temp = newArr[index1];
+  newArr[index1] = newArr[index2];
+  newArr[index2] = temp;
+
+  return newArr;
+};

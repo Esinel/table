@@ -137,10 +137,6 @@ export const headerDataBig = [
       "header": "Overall score"
   },
   {
-      "key": "overall_score",
-      "header": "Overall score"
-  },
-  {
       "key": "cognitive_numerical",
       "header": "Cognitive numerical"
   },
@@ -427,31 +423,6 @@ export const rowDataBig = [
   },
   {
       "project": "IG (SZ) with cognitive numerical",
-      "id": "30393",
-      "candidate_id": "25277",
-      "name": "Macaroni Cheese",
-      "email": "alex.lucas+20230419@spottedzebra.co.uk",
-      "last_updated": "2023-04-19T11:10:53.000Z",
-      "status": "COMPLETED",
-      "job_role": "IG (SZ) with cognitive numerical",
-      "overall_score": "N/A",
-      "cognitive_numerical": "N/A",
-      "right_for_the_future": "N/A",
-      "right_for_the_role": "N/A",
-      "right_for_us": "N/A",
-      "affiliation": "N/A",
-      "agility": "N/A",
-      "ambition": "N/A",
-      "analyses_information": "N/A",
-      "galloping_ahead": "N/A",
-      "makes_things_happen": "N/A",
-      "produces_great_work": "N/A",
-      "roam_free": "N/A",
-      "spotless": "N/A",
-      "will_and_skill_": "N/A"
-  },
-  {
-      "project": "IG (SZ) with cognitive numerical",
       "id": "29408",
       "candidate_id": "24291",
       "name": "Prawn Cocktail",
@@ -674,31 +645,6 @@ export const rowDataBig = [
       "roam_free": "98",
       "spotless": "96",
       "will_and_skill_": "99"
-  },
-  {
-      "project": "IG (SZ) with cognitive numerical",
-      "id": "57653",
-      "candidate_id": "67405",
-      "name": "Bat Man",
-      "email": "alex.lucas+20230913.1318@spottedzebra.co.uk",
-      "last_updated": "2023-09-13T12:23:03.000Z",
-      "status": "COMPLETED",
-      "job_role": "IG (SZ) with cognitive numerical",
-      "overall_score": "N/A",
-      "cognitive_numerical": "N/A",
-      "right_for_the_future": "N/A",
-      "right_for_the_role": "N/A",
-      "right_for_us": "N/A",
-      "affiliation": "N/A",
-      "agility": "N/A",
-      "ambition": "N/A",
-      "analyses_information": "N/A",
-      "galloping_ahead": "N/A",
-      "makes_things_happen": "N/A",
-      "produces_great_work": "N/A",
-      "roam_free": "N/A",
-      "spotless": "N/A",
-      "will_and_skill_": "N/A"
   },
   {
       "project": "IG (SZ) with cognitive numerical",
@@ -1157,25 +1103,45 @@ export function getRowData() {
   const enrichedRows = rowDataBig.map(row => {
 
 
-    return {
-      ...row,
-      overall_score: <HeatmapCell score={Number(row.overall_score)} />,
-      cognitive_numerical: <HeatmapCell score={Number(row.cognitive_numerical)} />,
-      right_for_the_future:  <HeatmapCell score={Number(row.right_for_the_future)} />,
-      right_for_the_role: <HeatmapCell score={Number(row.right_for_the_role)} />,
-      right_for_us: <HeatmapCell score={Number(row.right_for_us)} />,
-      affiliation:  <HeatmapCell score={Number(row.affiliation)} />,
-      agility:  <HeatmapCell score={Number(row.agility)} />,
-      ambition: <HeatmapCell score={Number(row.ambition)} />,
-      analyses_information: <HeatmapCell score={Number(row.analyses_information)} />,
-      galloping_ahead: <HeatmapCell score={Number(row.galloping_ahead)} />,
-      makes_things_happen: <HeatmapCell score={Number(row.makes_things_happen)} />,
-      produces_great_work: <HeatmapCell score={Number(row.produces_great_work)} />,
-      roam_free: <HeatmapCell score={Number(row.roam_free)} />,
-      spotless: <HeatmapCell score={Number(row.spotless)} />,
-      will_and_skill_: <HeatmapCell score={Number(row.will_and_skill_)} />
-    }
-  })
+  //   return {
+  //     ...row,
+  //     overall_score: <HeatmapCell score={Number(row.overall_score)} />,
+  //     cognitive_numerical: <HeatmapCell score={Number(row.cognitive_numerical)} />,
+  //     right_for_the_future:  <HeatmapCell score={Number(row.right_for_the_future)} />,
+  //     right_for_the_role: <HeatmapCell score={Number(row.right_for_the_role)} />,
+  //     right_for_us: <HeatmapCell score={Number(row.right_for_us)} />,
+  //     affiliation:  <HeatmapCell score={Number(row.affiliation)} />,
+  //     agility:  <HeatmapCell score={Number(row.agility)} />,
+  //     ambition: <HeatmapCell score={Number(row.ambition)} />,
+  //     analyses_information: <HeatmapCell score={Number(row.analyses_information)} />,
+  //     galloping_ahead: <HeatmapCell score={Number(row.galloping_ahead)} />,
+  //     makes_things_happen: <HeatmapCell score={Number(row.makes_things_happen)} />,
+  //     produces_great_work: <HeatmapCell score={Number(row.produces_great_work)} />,
+  //     roam_free: <HeatmapCell score={Number(row.roam_free)} />,
+  //     spotless: <HeatmapCell score={Number(row.spotless)} />,
+  //     will_and_skill_: <HeatmapCell score={Number(row.will_and_skill_)} />
+  //   }
+  // })
+
+  return {
+        ...row,
+        overall_score: <HeatmapCell score={Number(row.overall_score)} />,
+        cognitive_numerical: <HeatmapCell score={Number(row.cognitive_numerical)} />,
+        right_for_the_future:  <HeatmapCell score={Number(row.right_for_the_future)} />,
+        right_for_the_role: <HeatmapCell score={Number(row.right_for_the_role)} />,
+        right_for_us: <HeatmapCell score={Number(row.right_for_us)} />,
+        affiliation:  <HeatmapCell score={Number(row.affiliation)} />,
+        agility:  <HeatmapCell score={Number(row.agility)} />,
+        ambition: <HeatmapCell score={Number(row.ambition)} />,
+        analyses_information: <HeatmapCell score={Number(row.analyses_information)} />,
+        galloping_ahead: <HeatmapCell score={Number(row.galloping_ahead)} />,
+        makes_things_happen: <HeatmapCell score={Number(row.makes_things_happen)} />,
+        produces_great_work: <HeatmapCell score={Number(row.produces_great_work)} />,
+        roam_free: <HeatmapCell score={Number(row.roam_free)} />,
+        spotless: <HeatmapCell score={Number(row.spotless)} />,
+        will_and_skill_: <HeatmapCell score={Number(row.will_and_skill_)} />
+      }
+    })
 
 
   return enrichedRows;
@@ -1205,8 +1171,8 @@ function HeatmapCell({score}: {score: number}) {
   }
   
 
-  return (
-    <div style={{width: '100%', height: '60px', background: `${choosenColor}`}}></div>
+  return (<>{score.toString()}
+    </>
   )
 }
 
@@ -1235,6 +1201,66 @@ function HeatmapCellNormalized({score}: {score: number}) {
   
 
   return (
-    <div style={{width: '100%', height: '60px', background: `${choosenColor}`}}></div>
+    <>{score.toString()}</>
   )
+}
+
+
+
+
+export function getHeatmapColor({score}: {score: number}) {
+  if (score <= 5) {
+    return getHeatmapColorNormalized({score});
+  }
+  
+  if (score > 100 || !score) {
+    return 'white';
+  }
+
+  const colorGrades = ['#FAD3D2', '#FEEAEA', '#FFF6EA', '#F1EBFA', '#E5F3F1', '#CCE7E3'];
+  let choosenColor = colorGrades[0];
+  
+  if (score >= 0 && score <= 7) {
+    choosenColor = colorGrades[0];
+  } else if (score >= 8 && score <= 25) {
+    choosenColor = colorGrades[1];
+  } else if (score >= 26 && score <= 50) {
+    choosenColor = colorGrades[2];
+  } else if (score >= 51 && score <= 75) {
+    choosenColor = colorGrades[3];
+  } else if (score >= 76 && score <= 93) {
+    choosenColor = colorGrades[4];
+  } else if (score >= 94 && score <= 100) {
+    choosenColor = colorGrades[5];
+  }
+  
+
+  return choosenColor;
+}
+
+
+export function getHeatmapColorNormalized({score}: {score: number}) {
+  const colorGrades = ['#FAD3D2', '#FEEAEA', '#FFF6EA', '#F1EBFA', '#E5F3F1', '#CCE7E3'];
+  let choosenColor = colorGrades[0];
+  
+  switch (score) {
+    case 1:
+      choosenColor = colorGrades[0];
+      break;
+    case 2:
+      choosenColor = colorGrades[1];
+      break;
+    case 3:
+      choosenColor = colorGrades[2];
+      break;
+    case 4:
+      choosenColor = colorGrades[3];
+      break;
+    case 5:
+      choosenColor = colorGrades[5];
+    break;
+  }
+  
+
+  return choosenColor;
 }

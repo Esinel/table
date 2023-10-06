@@ -3,9 +3,11 @@ import Image from 'next/image'
 import './table.carbon.scss';
 import styles from './page.module.css'
 import { DataTable, Table as TableCarbon,  TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from '@carbon/react';
-import { headerData, rowData, headerDataBig, rowDataBig, getRowData } from '../../data';
+import { headerData, rowData, headerDataBig, rowDataBig, getRowData, getHeatmapColor } from '../../data';
 import { ChangeEvent, useState, useMemo } from 'react';
+import { debug } from 'console';
 
+const finalRows = getRowData();
 
 export default function Home() {
 
@@ -23,31 +25,15 @@ export default function Home() {
 
   const finalHeaders = useMemo(() => getFinalHeaders(showFirst, isRuleHidden), [showFirst, isRuleHidden]);
 
-  const finalRows = useMemo(() => getRowData(), [])
-
-  debugger
-
 
   return (
     <main className={styles.main}>
      <h1>Table - Extended</h1>
 
 
-      <fieldset>
-        <legend>Show first:</legend>
+     <ShowFirstFilter selected={showFirst} handleChangeShowFirst={handleChangeShowFirst} />
 
-        <div>
-          <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="projectFirst" name="showFirst" value="project" {...(showFirst === 'project' && {checked: true})} />
-          <label htmlFor="statusFirst">Show project first</label>
-        </div>
-
-        <div>
-          <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="nameFirst" name="showFirst" value="name" {...(showFirst === 'name' && {checked: true})} />
-          <label htmlFor="nameFirst">Show name first</label>
-        </div>
-
-        
-      </fieldset>
+     
 
 
 
@@ -62,7 +48,7 @@ export default function Home() {
     <div className="table-container">
         <DataTable
           isSortable={true}
-          rows={finalRows}
+          rows={rowDataBig}
           headers={finalHeaders}
         >
           {({ rows, headers, getHeaderProps, getTableProps }) => {
@@ -115,9 +101,12 @@ export default function Home() {
                           // onClick={onRowClick && handleRowClick}
                           // onKeyDown={onRowClick && handleEnterOrSpaceKeydown}
                         >
-                          {row.cells.map((cell) => (
-                            <TableCell key={cell.id}>{cell.value}</TableCell>
-                          ))}
+                          {row.cells.map((cell) => {
+                            const cellValue = Number(cell.value);
+                            return (
+                              <TableCell key={cell.id} style={{background: getHeatmapColor({score: cellValue})}}>{cell.value}</TableCell>
+                            )
+                          })}
                         </TableRow>
                       );
                     })}
@@ -158,3 +147,26 @@ function swapElements (array: any[], index1: number, index2: number) {
 
   return newArr;
 };
+
+
+function ShowFirstFilter({handleChangeShowFirst, selected = "project"} : {handleChangeShowFirst: (e: ChangeEvent<HTMLInputElement>) => void, selected: string}) {
+  
+  // debugger
+  return (
+    <fieldset>
+      <legend>Show first:</legend>
+
+      <div>
+        <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="projectFirst" name="showFirst" value="project" checked={selected === 'project'} />
+        <label htmlFor="statusFirst">Show project first</label>
+      </div>
+
+      <div>
+        <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="nameFirst" name="showFirst" value="name" checked={selected === 'name'} />
+        <label htmlFor="nameFirst">Show name first</label>
+      </div>
+
+      
+    </fieldset>
+  )
+}

@@ -151,18 +151,17 @@ function swapElements (array: any[], index1: number, index2: number) {
 
 function ShowFirstFilter({handleChangeShowFirst, selected = "project"} : {handleChangeShowFirst: (e: ChangeEvent<HTMLInputElement>) => void, selected: string}) {
   
-  // debugger
   return (
     <fieldset>
       <legend>Show first:</legend>
 
       <div>
-        <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="projectFirst" name="showFirst" value="project" checked={selected === 'project'} />
+        <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="projectFirst" value="project" checked={selected === 'project'} />
         <label htmlFor="statusFirst">Show project first</label>
       </div>
 
       <div>
-        <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="nameFirst" name="showFirst" value="name" checked={selected === 'name'} />
+        <input onChange={(e) => handleChangeShowFirst(e)} type="radio" id="nameFirst" value="name" checked={selected === 'name'} />
         <label htmlFor="nameFirst">Show name first</label>
       </div>
 

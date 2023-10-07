@@ -34,6 +34,17 @@
     left: 300px;
   }
 
+  // fixing next one scrore
+  table td:nth-child(12) {
+    position: sticky;
+    left: 450px;
+  }
+
+  thead th:nth-child(12) {
+    position: sticky;
+    left: 450px;
+  }
+
   // remove padding if td has div inside
   td:has(div) {
     padding: 0;

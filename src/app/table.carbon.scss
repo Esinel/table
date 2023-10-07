@@ -10,24 +10,46 @@
   max-width: 900px;
   overflow-x: scroll;
 
-  td:has(div) {
-    padding: 0;
-  }
-
-  thead th {
-    white-space: nowrap;
+  // fixing first column
+  table td:first-child {
+    position: sticky;
+    left: 0;
   }
 
   thead th:first-child {
     min-width: 300px;
+    position: sticky;
+    left: 0;
+  }
+
+  // fixing overall scrore
+  table td:nth-child(9) {
+    position: sticky;
+    left: 300px;
+  }
+
+  thead th:nth-child(9) {
+    min-width: 300px;
+    position: sticky;
+    left: 300px;
+  }
+
+  // remove padding if td has div inside
+  td:has(div) {
+    padding: 0;
+  }
+
+  // prevent text wrapping
+  thead th {
+    white-space: nowrap;
   }
 
   thead th:nth-child(8) {
     min-width: 200px;
   }
 
-  thead th:nth-child(3) {
-    border-right: 3px solid black !important;
+  thead th:nth-child(9) {
+    min-width: 150px;
   }
 
   tbody tr td:nth-child(3) {

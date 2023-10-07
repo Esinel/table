@@ -31,19 +31,18 @@ export default function Home() {
      <h1>Table - Extended</h1>
 
 
-     <ShowFirstFilter selected={showFirst} handleChangeShowFirst={handleChangeShowFirst} />
+    <ShowFirstFilter 
+      selected={showFirst}
+      handleChangeShowFirst={handleChangeShowFirst} 
+    />
 
-     
 
-
-
-      <div style={{margin: '15px 0'}}>
-        <input onChange={(e) => handleHideRule(e)} type="checkbox" id="hideRule" name="hideRule"/>
-        <label htmlFor='hideRule'>{' '}Hide ID Column</label>
-      </div>
+    <div style={{margin: '15px 0'}}>
+      <input onChange={(e) => handleHideRule(e)} type="checkbox" id="hideRule" name="hideRule"/>
+      <label htmlFor='hideRule'>{' '}Hide ID Column</label>
+    </div>
 
       
-
 
     <div className="table-container">
         <DataTable

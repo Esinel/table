@@ -13,6 +13,7 @@ export default function Home() {
 
   const [showFirst, setShowFirst] = useState('project');
   const [isRuleHidden, setIsRuleHidden] = useState(false);
+  const [isTableExpanded, setIsTableExpanded] = useState(false);
 
 
   function handleChangeShowFirst(e: ChangeEvent<HTMLInputElement>) {
@@ -21,6 +22,10 @@ export default function Home() {
 
   function handleHideRule(e: ChangeEvent<HTMLInputElement>) {
     setIsRuleHidden(e.target.checked);
+  }
+
+  function toggleExpand() {
+    setIsTableExpanded(isExpanded => !isExpanded)
   }
 
   const finalHeaders = useMemo(() => getFinalHeaders(showFirst, isRuleHidden), [showFirst, isRuleHidden]);
@@ -43,8 +48,9 @@ export default function Home() {
     </div>
 
       
+    <button onClick={toggleExpand}>{isTableExpanded ? 'Shrink' : 'Extend'}</button>
 
-    <div className="table-container">
+    <div className={`table-container ${isTableExpanded && 'expanded'}`}>
         <DataTable
           isSortable={true}
           rows={rowDataBig}

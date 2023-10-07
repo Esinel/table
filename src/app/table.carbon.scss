@@ -7,8 +7,17 @@
 @use '@carbon/styles/scss/components/pagination-nav';
 
 .table-container {
-  max-width: 900px;
+  transition: 0.21s ease-in-out;
+  width: 900px;
+  height: 900px;
+  resize: both;
   overflow-x: scroll;
+  margin-bottom: 300px;
+
+  &.expanded {
+    width: 100vw;
+    height: 100vh;
+  }
 
   // fixing first column
   table td:first-child {
